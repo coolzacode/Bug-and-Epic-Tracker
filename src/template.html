@@ -6,6 +6,103 @@
     <title>Bug and Epic Tracker</title>
 </head>
 <body>
-    
+    <header>
+        <h1>B&E Trackers</h1>
+    </header>
+
+    <main class="dashboard-layout">
+        <aside class="side-bar">
+            <div class="sidebar-header">
+                <h2>Epics</h2>
+                <button type="button" id="btn-new-epic">+ New Epic</button>
+            </div>
+
+            <ul class="epic-list" id="epic-list-container">
+                <li><button type="button" class="epic-select-btn" data-epic-id="1">Epic 1: [name]</button></li>
+                <li><button type="button" class="epic-select-btn" data-epic-id="2">Epic 2: [other name]</button></li>
+                <li><button type="button" class="epic-select-btn" data-epic-id="3">Epic 3: [another name]</button></li>
+            </ul>
+        </aside>
+
+        <section class="epic-details">
+            <header class="epic-header">
+                <h2 id="active-epic-title">Epic 1: [name]</h2>
+                <div class="epic-controls">
+                    <select id="ticket-filter" aria-label="Filter tickets">
+                        <option value="all">All</option>
+                        <option value="critical">Critical</option>
+                        <option value="completed">Completed</option>
+                    </select>
+                    <button type="button" id="btn-new-ticket">+ New Ticket</button>
+                </div>
+            </header>
+
+            <ul class="ticket-grid" id="ticket-grid-container">
+                <li class="ticket-card">
+                    <h3 class="ticket-title">Fix login crash</h3>
+                    <p class="ticket-priority critical">Priority: Critical</p>
+                    <p class="ticket-due">Due: Tomorrow</p>
+                    <div class="ticket-actions">
+                        <button type="button" class="btn-view-ticket">View/Edit</button>
+                        <button type="button" class="btn-delete-ticket">Delete</button>
+                    </div>
+                </li>
+                <li class="ticket-card">
+                    <h3 class="ticket-title">Update input border colors</h3>
+                    <p class="ticket-priority low">Priority: Low</p>
+                    <p class="ticket-due">Due: in 3 days</p>
+                    <div class="ticket-actions">
+                        <button type="button" class="btn-view-ticket">View/Edit</button>
+                        <button type="button" class="btn-delete-ticket">Delete</button>
+                    </div>
+                </li>
+            </ul>
+        </section>
+    </main>
+
+    <dialog id="ticket-modal">
+        <form method="dialog" id="ticket-form">
+
+            <header class="modal-header">
+                <input type="text" id="modal-ticket-title" value="Fix login crash" required>
+            </header>
+
+            <div class="modal-meta-data">
+                <label for="modal-epic-select">Epic:</label>
+                <select id="modal-epic-select">
+                    <option value="1">Auth System</option>
+                    <option value="2">Payment Gateway</option>
+                </select>
+
+                <label for="modal-due-date">Due Date:</label>
+                <input type="date" id="modal-due-date">
+
+                <label for="modal-priority">Priority:</label>
+                <select id="modal-priority">
+                    <option value="low">Low</option>
+                    <option value="medium">Medium</option>
+                    <option value="critical">Critical</option>
+                </select>
+
+                <label for="modal-status">Status:</label>
+                <select id="modal-status">
+                    <option value="todo">To Do</option>
+                    <option value="in-progress">In Progress</option>
+                    <option value="done">Done</option>
+                </select>
+            </div>
+
+            <div class="modal-description">
+                <label for="modal-desc-text">Description</label>
+                <textarea id="modal-desc-text" rows="5">App crashes when user hits enter without typing a password.</textarea>
+            </div>
+
+            <footer class="modal-actions">
+                <button type="button" id="btn-close-modal">Close</button>
+                <button type="submit" id="btn-save-modal">Save Changes</button>
+                <button type="button" id="btn-delete-modal-ticket">Delete Ticket</button>
+            </footer>
+        </form>
+    </dialog>
 </body>
 </html>
