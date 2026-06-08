@@ -1,13 +1,27 @@
 import './styles.css';
-import { Epic, Ticket } from './modules.js';
+import { Epic, Ticket } from './models.js';
+import { epicObjects, addEpic, addTicketToEpic, deleteTicket } from './manager.js'
 
+console.log('Default state:', epicObjects);
 
-const authEpic = new Epic('Authentication System');
+const newEpic = addEpic('New Epic');
 
-const bug1 = new Ticket('Fix login crash', '06-08-2026', 'critical');
-const bug2 = new Ticket('Update border colors', '06-10-2026', 'low');
+addTicketToEpic(newEpic.id, {
+    title: 'Fix login crash',
+    dueDate: '06-10-2026',
+    priority: 'critical',
+    description: 'App crashes on enter key.'
+});
 
-authEpic.tickets.push(bug1);
-authEpic.tickets.push(bug2);
+const lowPriorityTicket = addTicketToEpic(newEpic.id, {
+    title: 'Change button color',
+    dueDate: '06-10-2026',
+    priority: 'low',
+    description: 'Make it a lighter red.'
+});
 
-console.log(authEpic);
+console.log("After adding data", epicObjects);
+
+deleteTicket(newEpic.id, lowPriorityTicket.id);
+
+console.log("After deletion:", epicObjects);

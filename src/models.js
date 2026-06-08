@@ -13,6 +13,6 @@ export class Ticket {
         this.dueDate = dueDate;
         this.priority = priority;
         this.description = description;
-        this.status = 'todo'; // every new ticket stats as 'To Do'
+        this.status = 'todo'; // every new ticket starts as 'To Do'
     }
 }
