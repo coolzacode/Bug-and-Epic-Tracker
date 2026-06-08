@@ -1,0 +1,10 @@
+export default class Ticket {
+    constructor (title, dueDate, priority, description = "") {
+        this.id = crypto.randomUUID();
+        this.title = title;
+        this.dueDate = dueDate;
+        this.priority = priority;
+        this.description = description;
+        this.status = 'todo'; // every new ticket stats as 'To Do'
+    }
+}
