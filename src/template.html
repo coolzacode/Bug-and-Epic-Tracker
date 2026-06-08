@@ -6,12 +6,12 @@
     <title>Bug and Epic Tracker</title>
 </head>
 <body>
-    <header>
-        <h1>B&E Trackers</h1>
+    <header class="nav-header">
+        <h1>B&E Tracker</h1>
     </header>
 
     <main class="dashboard-layout">
-        <aside class="side-bar">
+        <aside class="sidebar">
             <div class="sidebar-header">
                 <h2>Epics</h2>
                 <button type="button" id="btn-new-epic">+ New Epic</button>
@@ -24,7 +24,7 @@
             </ul>
         </aside>
 
-        <section class="epic-details">
+        <section class="epic-main">
             <header class="epic-header">
                 <h2 id="active-epic-title">Epic 1: [name]</h2>
                 <div class="epic-controls">
@@ -38,22 +38,31 @@
             </header>
 
             <ul class="ticket-grid" id="ticket-grid-container">
-                <li class="ticket-card">
+                <li class="ticket-card critical">
                     <h3 class="ticket-title">Fix login crash</h3>
-                    <p class="ticket-priority critical">Priority: Critical</p>
+                    <span class="ticket-priority-badge critical">Critical</span>
                     <p class="ticket-due">Due: Tomorrow</p>
                     <div class="ticket-actions">
-                        <button type="button" class="btn-view-ticket">View/Edit</button>
-                        <button type="button" class="btn-delete-ticket">Delete</button>
+                        <button type="button" class="btn secondary btn-view-ticket">View/Edit</button>
+                        <button type="button" class="btn danger btn-delete-ticket">Delete</button>
                     </div>
                 </li>
-                <li class="ticket-card">
+                <li class="ticket-card medium">
                     <h3 class="ticket-title">Update input border colors</h3>
-                    <p class="ticket-priority low">Priority: Low</p>
+                    <span class="ticket-priority-badge medium">medium</span>
                     <p class="ticket-due">Due: in 3 days</p>
                     <div class="ticket-actions">
-                        <button type="button" class="btn-view-ticket">View/Edit</button>
-                        <button type="button" class="btn-delete-ticket">Delete</button>
+                        <button type="button" class="btn secondary btn-view-ticket">View/Edit</button>
+                        <button type="button" class="btn danger btn-delete-ticket">Delete</button>
+                    </div>
+                </li>
+                <li class="ticket-card low">
+                    <h3 class="ticket-title">Update input border colors</h3>
+                    <span class="ticket-priority-badge low">Low</span>
+                    <p class="ticket-due">Due: in 3 days</p>
+                    <div class="ticket-actions">
+                        <button type="button" class="btn secondary btn-view-ticket">View/Edit</button>
+                        <button type="button" class="btn danger btn-delete-ticket">Delete</button>
                     </div>
                 </li>
             </ul>
@@ -94,13 +103,13 @@
 
             <div class="modal-description">
                 <label for="modal-desc-text">Description</label>
-                <textarea id="modal-desc-text" rows="5">App crashes when user hits enter without typing a password.</textarea>
+                <textarea id="modal-desc-text" rows="5" placeholder="App crashes when user hits enter without typing a password."></textarea>
             </div>
 
             <footer class="modal-actions">
                 <button type="button" id="btn-close-modal">Close</button>
                 <button type="submit" id="btn-save-modal">Save Changes</button>
-                <button type="button" id="btn-delete-modal-ticket">Delete Ticket</button>
+                <button type="button" id="btn-delete-modal-ticket" class="btn danger">Delete Ticket</button>
             </footer>
         </form>
     </dialog>

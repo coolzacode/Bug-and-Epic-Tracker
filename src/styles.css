@@ -1,0 +1,335 @@
+/* base.css */
+/* for resets, fonts and global colors */
+
+:root {
+    /* Layout Backgrounds */
+    --bg-main: rgba(248, 250, 252, 1);
+    --bg-sidebar: rgba(227, 242, 253, 0.4);
+    --bg-card: rgba(255, 255, 255, 1);
+    --bg-modal: rgba(255, 255, 255, 1);
+
+    /* Text Colors */
+    --text-main: rgba(15, 23, 42, 1);
+    --text-muted: rgba(100, 116, 139, 1);
+
+    /* Interactive Elements */
+    --brand-primary: rgba(33, 150, 243, 1);
+    --brand-hover: rgba(21, 101, 192, 1);
+    --border-color: rgba(187, 222, 251, 0.5);
+
+    /* Critical Priority */
+    --priority-critical-text: rgba(164, 19, 60, 1);
+    --priority-critical-bg: rgba(255, 204, 213, 0.4);
+    --priority-critical-border: rgba(201, 24, 74, 1);
+
+    /* Medium Priority */
+    --priority-medium-text: rgba(180, 83, 9, 1);
+    --priority-medium-bg: rgba(254, 243, 199, 1);
+    --priority-medium-border: rgba(217, 119, 6, 1);
+
+    /* Low Priority */
+    --priority-low-text: rgba(21, 101, 192, 1);
+    --priority-low-bg: rgba(227, 242, 253, 0.6);
+    --priority-low-border: rgba(144, 202, 249, 1);
+}
+
+@media (prefers-color-scheme: dark) {
+    :root {
+        /* Layout Backgrounds */
+        --bg-main: rgba(15, 23, 42, 1);
+        --bg-sidebar: rgba(9, 15, 29, 1);
+        --bg-card: rgba(30, 41, 59, 1);
+        --bg-modal: rgba(30, 41, 59, 1);
+
+        /* Text Colors */
+        --text-main: rgba(241, 245, 249, 1);
+        --text-muted: rgba(148, 163, 184, 1);
+
+        /* Interactive Elements */
+        --brand-primary: rgba(100, 181, 246, 1);
+        --brand-hover: rgba(144, 202, 249, 1);
+        --border-color: rgba(255, 255, 255, 0.08);
+
+        --priority-critical-text: rgba(255, 117, 143, 1);
+        --priority-critical-bg: rgba(164, 19, 60, 0.25);
+        
+        --priority-medium-text: rgba(251, 191, 36, 1);
+        --priority-medium-bg: rgba(180, 83, 9, 0.25);
+        
+        --priority-low-text: rgba(144, 202, 249, 1);
+        --priority-low-bg: rgba(21, 101, 192, 0.25);
+    }
+}
+
+/* RESET */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: var(--bg-main);
+    font-family: system-ui, --apple-system, sans-serif;
+    color: var(--text-main);
+    line-height: 1.5;
+    overflow: hidden;
+}
+
+ul {
+    list-style: none;
+}
+
+input[type="text"], input[type="date"], select, textarea {
+    width: 100%;
+    padding: 0.5rem;
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
+    background-color: var(--bg-card);
+    color: var(--text-main);
+    outline: none;
+}
+
+input:focus, select:focus, textarea:focus {
+    border-color: var(--brand-primary);
+}
+
+button, input, select, textarea {
+    font: inherit;
+}
+
+button {
+    cursor: pointer;
+    border: none;
+    border-radius: 6px;
+    padding: 0.5rem 1rem;
+    font-weight: 500;
+    transition: all 0.2s ease;
+}
+
+#btn-new-epic, #btn-new-ticket, #btn-save-modal {
+    min-width: fit-content;
+    background-color: var(--brand-primary);
+}
+#btn-new-epic:hover, #btn-new-ticket:hover, #btn-save-modal:hover {
+    background-color: var(--brand-hover);
+}
+
+.btn.secondary {
+    background-color: transparent;
+    color: var(--brand-primary);
+    border: 1px solid var(--brand-primary);
+}
+.btn.secondary:hover {
+    background-color: var(--brand-primary);
+    color: white;
+}
+
+.btn.danger {
+    background-color: transparent;
+    color: var(--priority-critical-text);
+    border: 1px solid var(--priority-critical-border);
+}
+.btn.danger:hover {
+    background-color: var(--priority-critical-bg);
+}
+
+/* layout.css */
+/* for header, sidebar and main grid layout */
+
+.nav-header {
+    font-family:'Trebuchet MS';
+    height: 60px;
+    display: flex;
+    align-items: center;
+    padding: 0 2rem;
+    background-color: var(--bg-sidebar);
+    border-bottom: 1px solid var(--border-color);
+}
+
+.dashboard-layout {
+    display: flex;
+    height: calc(100vh - 60px); /* 60px = the height of the .nav-header */
+}
+
+.sidebar {
+    width: 280px;
+    background-color: var(--bg-sidebar);
+    border-right: 1px solid var(--border-color);
+    display: flex;
+    flex-direction: column;
+}
+
+.sidebar-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.5rem;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.epic-list {
+    flex-grow: 1;
+    overflow-y: auto;
+    padding: 1rem;
+}
+
+.epic-select-btn {
+    width: 100%;
+    text-align: left;
+    background-color: transparent;
+    color: var(--text-muted);
+    padding: 0.75rem 1rem;
+    border-radius: 
+    6px;
+}
+.epic-select-btn:hover {
+    background-color: var(--bg-card);
+    color: var(--text-main);
+}
+
+.epic-main {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    padding: 2rem;
+    overflow-y: auto;
+}
+
+.epic-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2rem;
+}
+
+.epic-controls {
+    display: flex;
+    gap: 1rem;
+}
+
+.ticket-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 1.5rem;
+}
+
+/* components.css */
+/* for individual ticket cards and modal popups */
+
+.ticket-card {
+    background-color: var(--bg-card);
+    padding: 1.5rem;
+    border-radius: 8px;
+    border: 1px solid var(--border-color);
+    border-left: 6px solid var(--border-color); /* default color */
+    display: flex;
+    flex-direction: column;
+    gap: 0.3rem;
+}
+
+.ticket-card.critical { border-left-color: var(--priority-critical-border); }
+.ticket-card.medium   { border-left-color: var(--priority-medium-border); }
+.ticket-card.low      { border-left-color: var(--priority-low-border); }
+
+.ticket-priority-badge {
+    display: inline-block;
+    align-self: flex-start;
+    padding: 0.2rem 0.6rem;
+    border-radius: 12px;
+    font-size: 0.8rem;
+    font-weight: 600;
+}
+.ticket-priority-badge.critical {
+    background-color: var(--priority-critical-bg); 
+    color: var(--priority-critical-text);
+}
+.ticket-priority-badge.medium {
+    background-color: var(--priority-medium-bg);
+    color: var(--priority-medium-text);
+}
+.ticket-priority-badge.low {
+    background-color: var(--priority-low-bg);
+    color: var(--priority-low-text);
+}
+
+.ticket-due {
+    font-size: 0.9rem;
+    color: var(--text-muted);
+    margin-top: 0.5rem;
+}
+
+.ticket-actions {
+    margin-top: 1rem;
+    display: flex;
+    gap: 0.5rem;
+}
+
+#ticket-modal {
+    margin: auto;
+    padding: 2rem;
+    background-color: var(--bg-modal);
+    color: var(--text-main);
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    width: 90%;
+    max-width: 500px;
+}
+#ticket-modal::backdrop {
+    backdrop-filter: blur(3px);
+}
+
+#ticket-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.modal-header input {
+    font-size: 1.5rem;
+    font-weight: bold;
+    border: none;
+    border-bottom: 2px solid var(--border-color);
+    border-radius: 0;
+    padding: 0.5rem 0;
+    background-color: transparent;
+}
+.modal-header input:focus {
+    border-bottom-color: var(--brand-primary);
+}
+
+.modal-meta-data {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+    align-items: center;
+}
+
+.modal-meta-data label {
+    font-size: 0.9rem;
+    color: var(--text-muted);
+    font-weight: 600;
+}
+
+.modal-description {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.modal-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 1rem;
+    margin-top: 1rem;
+    padding-top: 1rem;
+    border-top: 1px solid var(--border-color);
+}
+
+#btn-close-modal {
+    background-color: transparent;
+    color: var(--text-muted);
+}
+#btn-close-modal:hover {
+    color: var(--text-main);
+}
