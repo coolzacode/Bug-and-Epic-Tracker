@@ -1,6 +1,6 @@
 import './styles.css';
-import Epic from './epic.js';
-import Ticket from './ticket.js';
+import { Epic, Ticket } from './modules.js';
+
 
 const authEpic = new Epic('Authentication System');
 

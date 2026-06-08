@@ -1,4 +1,12 @@
-export default class Ticket {
+export class Epic {
+    constructor(name) {
+        this.id = crypto.randomUUID();
+        this.name = name;
+        this.tickets = [];
+    }
+}
+
+export class Ticket {
     constructor (title, dueDate, priority, description = "") {
         this.id = crypto.randomUUID();
         this.title = title;
