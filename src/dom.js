@@ -7,12 +7,11 @@ export function displayEpics(epics) {
     epics.forEach((epic, index) => {
         const epicList = document.createElement('li');
         const epicButton = document.createElement('button');
-        let adjustedIndex = index + 1;
 
         epicButton.type = 'button';
         epicButton.className = 'epic-select-btn';
-        epicButton.dataset.epicID = `${adjustedIndex}`;
-        epicButton.textContent = `Epic ${adjustedIndex}: ${epic.name}`;
+        epicButton.dataset.epicID = `${epic.id}`;
+        epicButton.textContent = `Epic ${index}: ${epic.name}`;
 
         epicList.appendChild(epicButton);
         fragment.appendChild(epicList);
