@@ -1,75 +1,87 @@
 import './styles.css';
-import { Epic, Ticket } from './models.js';
-import { epicObjects, addEpic, addTicketToEpic, deleteTicket } from './manager.js'
+import { epicObjects, activeEpicId, setActiveEpicId, getActiveEpic, addEpic, addTicketToEpic, deleteTicket } from './manager.js'
 import { epicContainer, displayEpics, displayTickets } from './dom.js';
 
-const createEpic = document.getElementById('btn-new-epic');
-const createTicket = document.getElementById('btn-new-ticket');
+const createEpicBtn = document.getElementById('btn-new-epic');
+const createTicketBtn = document.getElementById('btn-new-ticket');
 const epicModal = document.getElementById('epic-modal');
 const ticketModal = document.getElementById('ticket-modal');
 const epicForm = document.getElementById('epic-form');
 const ticketForm = document.getElementById('ticket-form');
+const ticketContainer = document.getElementById('ticket-grid-container');
+const closeButtons = document.querySelectorAll('#btn-close-modal');
 
+// Default UI
+displayEpics(epicObjects, activeEpicId);
+displayTickets(getActiveEpic());
+
+// Modal Controls
+createEpicBtn.addEventListener('click', () => epicModal.showModal());
+createTicketBtn.addEventListener('click', () => ticketModal.showModal());
+
+closeButtons.forEach(btn => {
+    btn.addEventListener('click', () => {
+        epicModal.close();
+        ticketModal.close();
+    });
+});
+
+// Form Submissions
 function handleEpicSubmit(e) {
     e.preventDefault();
     const formData = new FormData(e.target);
-    addEpic(formData.get('name'));
+
+    const newEpic = addEpic(formData.get('name'));
+    setActiveEpicId(newEpic.id);
 
     e.target.reset();
     epicModal.close();
-    displayEpics(epicObjects);
+
+    displayEpics(epicObjects, activeEpicId);
+    displayTickets(getActiveEpic());
 }
 
 function handleTicketSubmit(e) {
     e.preventDefault();
     const formData = new FormData(e.target);
 
-    const newTicket = new Ticket (
-        formData.get('title'),
-        formData.get('dueDate'),
-        formData.get('priority'),
-        formData.get('description')
-    );
+    const ticketData = {
+        title: formData.get('title'),
+        dueDate: formData.get('dueDate'),
+        priority: formData.get('priority'),
+        description: formData.get('description')
+    };
 
-    const activeEpic = epicObjects.find(epic => epic.active === true);
-    addTicketToEpic(activeEpic, newTicket);
-    console.log(activeEpic);
+    const activeEpic = getActiveEpic();
+    addTicketToEpic(activeEpic.id, ticketData);
 
     e.target.reset();
     ticketModal.close();
+
     displayTickets(activeEpic);
 }
-
-createEpic.addEventListener('click', () => {
-    epicModal.showModal();
-});
-
-createTicket.addEventListener('click', () => {
-    ticketModal.showModal();
-});
 
 epicForm.addEventListener('submit', handleEpicSubmit);
 ticketForm.addEventListener('submit', handleTicketSubmit);
 
+// Sidebar
 epicContainer.addEventListener('click', (e) => {
-    epicObjects.forEach(epic => {
-        epic.active = false;
-    });
+    if (e.target.tagName !== 'BUTTON') return;
 
-    const elementType = e.target.tagName;
-    if (elementType !== 'BUTTON') return;
-    
-    const epicContainerGrandChildren = document.querySelectorAll('#epic-list-container > * > *');
-    epicContainerGrandChildren.forEach(button => {
-        button.classList.remove('active');
-    });
+    const targetId = e.target.dataset.epicId;
+    setActiveEpicId(targetId);
 
-    const target = e.target;
-    const targetId = target.dataset.epicId;
-    const activeEpic = epicObjects.find(epic => epic.id === targetId);
+    displayEpics(epicObjects, activeEpicId);
+    displayTickets(getActiveEpic());
+});
 
-    activeEpic.active = true;
-    target.classList.toggle('active');
+// Delete Ticket
+ticketContainer.addEventListener('click', (e) => {
+    if (e.target.classList.contains('btn-delete-ticket')) {
+        const ticketId = e.target.dataset.ticketId;
+        const currentEpic = getActiveEpic();
 
-    displayTickets(activeEpic);
+        deleteTicket(currentEpic.id, ticketId);
+        displayTickets(currentEpic);
+    }
 });
