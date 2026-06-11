@@ -265,7 +265,7 @@ button {
     gap: 0.5rem;
 }
 
-#ticket-modal {
+#epic-modal, #ticket-modal {
     margin: auto;
     padding: 2rem;
     background-color: var(--bg-modal);
@@ -279,7 +279,7 @@ button {
     backdrop-filter: blur(3px);
 }
 
-#ticket-form {
+#epic-form, #ticket-form {
     display: flex;
     flex-direction: column;
     gap: 1.5rem;

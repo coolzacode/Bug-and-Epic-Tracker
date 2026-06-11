@@ -69,9 +69,22 @@
         </section>
     </main>
 
+    <dialog id="epic-modal">
+        <form method="dialog" id="epic-form">
+            <header class="modal-header">
+                <input name="name" type="text" id="modal-ticket-title" value="Fix login crash" required>
+            </header>
+
+            <footer class="modal-actions">
+                <button type="button" id="btn-close-modal">Close</button>
+                <button type="submit" id="btn-save-modal">Save Changes</button>
+                <button type="button" id="btn-delete-modal-ticket" class="btn danger">Delete Ticket</button>
+            </footer>
+        </form>
+    </dialog>
+
     <dialog id="ticket-modal">
         <form method="dialog" id="ticket-form">
-
             <header class="modal-header">
                 <input type="text" id="modal-ticket-title" value="Fix login crash" required>
             </header>
