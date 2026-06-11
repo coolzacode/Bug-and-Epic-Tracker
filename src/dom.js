@@ -1,27 +1,30 @@
 export const epicContainer = document.getElementById('epic-list-container');
+const ticketContainer = document.getElementById('ticket-grid-container');
+const activeEpicTitle = document.getElementById('active-epic-title');
 
-export function displayEpics(epics) {
+export function displayEpics(epics, activeId) {
     epicContainer.replaceChildren();
     const fragment = document.createDocumentFragment();
 
-    epics.forEach((epic, index) => {
+    epics.forEach((epic) => {
         const epicList = document.createElement('li');
         const epicButton = document.createElement('button');
 
         epicButton.type = 'button';
-        epicButton.className = 'epic-select-btn';
-        epicButton.dataset.epicId = `${epic.id}`;
-        epicButton.textContent = `Epic ${index}: ${epic.name}`;
+        epicButton.className = `epic-select-btn ${epic.id === activeId ? 'active' : ''}`;
+        epicButton.dataset.epicId = epic.id;
+        epicButton.textContent = epic.name;
 
         epicList.appendChild(epicButton);
         fragment.appendChild(epicList);
     });
+
     epicContainer.appendChild(fragment);
 }
 
 export function displayTickets(activeEpic) {
-    const ticketContainer = document.getElementById('ticket-grid-container');
     ticketContainer.replaceChildren();
+    activeEpicTitle.textContent = activeEpic.name;
     const fragment = document.createDocumentFragment();
 
     activeEpic.tickets.forEach(ticket => {
@@ -29,7 +32,6 @@ export function displayTickets(activeEpic) {
         const ticketTitle = document.createElement('h3');
         const ticketPriorityBadge = document.createElement('span');
         const ticketDue = document.createElement('p');
-
         const ticketActions = document.createElement('div');
         const viewButton = document.createElement('button');
         const deleteButton = document.createElement('button');
@@ -39,16 +41,18 @@ export function displayTickets(activeEpic) {
         ticketTitle.className = 'ticket-title';
         ticketPriorityBadge.className = `ticket-priority-badge ${ticket.priority}`;
         ticketDue.className = 'ticket-due';
-        ticketActions.type = 'button';
         ticketActions.className = 'ticket-actions';
+
         viewButton.className = 'btn secondary btn-view-ticket';
+        viewButton.type = 'button';
+
         deleteButton.className = 'btn danger btn-delete-ticket';
+        deleteButton.type = 'button';
+        deleteButton.dataset.ticketId = ticket.id;
 
         ticketTitle.textContent = `${ticket.title}`;
-        console.log(ticket.title);
-        console.log(ticket.priority);
         ticketPriorityBadge.textContent = `${ticket.priority.charAt(0).toUpperCase() + ticket.priority.slice(1)}`;
-        ticketDue.textContent = `${ticket.dueDate}`;
+        ticketDue.textContent = `Due ${ticket.dueDate}`;
         viewButton.textContent = 'View/Edit';
         deleteButton.textContent = 'Delete';
 
@@ -56,5 +60,6 @@ export function displayTickets(activeEpic) {
         ticketCard.append(ticketTitle, ticketPriorityBadge, ticketDue, ticketActions);
         fragment.appendChild(ticketCard);
     });
+    
     ticketContainer.appendChild(fragment);
 }
