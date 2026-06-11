@@ -19,14 +19,10 @@ export function displayEpics(epics) {
     epicContainer.appendChild(fragment);
 }
 
-export function displayTickets(epics, id) {
+export function displayTickets(activeEpic) {
     const ticketContainer = document.getElementById('ticket-grid-container');
     ticketContainer.replaceChildren();
     const fragment = document.createDocumentFragment();
-
-    const activeEpic = epics.find(epic => epic.id === id);
-
-    if (activeEpic === undefined) return;
 
     activeEpic.tickets.forEach(ticket => {
         const ticketCard = document.createElement('li');
@@ -49,6 +45,8 @@ export function displayTickets(epics, id) {
         deleteButton.className = 'btn danger btn-delete-ticket';
 
         ticketTitle.textContent = `${ticket.title}`;
+        console.log(ticket.title);
+        console.log(ticket.priority);
         ticketPriorityBadge.textContent = `${ticket.priority.charAt(0).toUpperCase() + ticket.priority.slice(1)}`;
         ticketDue.textContent = `${ticket.dueDate}`;
         viewButton.textContent = 'View/Edit';

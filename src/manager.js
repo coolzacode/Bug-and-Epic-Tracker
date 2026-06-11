@@ -11,23 +11,9 @@ export function addEpic(name) {
     return newEpic;
 }
 
-export function addTicketToEpic(epicId, ticketData) {
-    const epic = epicObjects.find(epic => epic.id === epicId);
-    
-    if (!epic) {
-        console.error(`Epic with ID ${epicId} not found.`);
-        return null;
-    }
-
-    const newTicket = new Ticket (
-        ticketData.title,
-        ticketData.dueDate,
-        ticketData.priority,
-        ticketData.description
-    );
-
-    epic.tickets.push(newTicket);
-    return newTicket;
+export function addTicketToEpic(epic, ticket) {
+    epic.tickets.push(ticket);
+    return ticket;
 }
 
 export function deleteTicket(epicId, ticketId) {

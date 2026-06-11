@@ -183,7 +183,7 @@ button {
     border-radius: 
     6px;
 }
-.epic-select-btn:hover {
+.epic-select-btn:hover, .active {
     background-color: var(--bg-card);
     color: var(--text-main);
 }
@@ -275,7 +275,7 @@ button {
     width: 90%;
     max-width: 500px;
 }
-#ticket-modal::backdrop {
+#epic-modal::backdrop, #ticket-modal::backdrop {
     backdrop-filter: blur(3px);
 }
 
