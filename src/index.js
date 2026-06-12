@@ -1,5 +1,5 @@
 import './styles.css';
-import { epicObjects, activeEpicId, setActiveEpicId, getActiveEpic, addEpic, addTicketToEpic, deleteTicket } from './manager.js'
+import { epicObjects, allTickets, activeEpicId, setActiveEpicId, getActiveEpic, getTicket, addEpic, addTicketToEpic, updateTicket, deleteTicket } from './manager.js'
 import { epicContainer, displayEpics, displayTickets } from './dom.js';
 
 const createEpicBtn = document.getElementById('btn-new-epic');
@@ -19,11 +19,16 @@ displayTickets(getActiveEpic());
 createEpicBtn.addEventListener('click', () => epicModal.showModal());
 createTicketBtn.addEventListener('click', () => ticketModal.showModal());
 
+function closeAndResetModals() {
+    epicForm.reset();
+    ticketForm.reset();
+    ticketForm.removeAttribute('data-editing-id');
+    epicModal.close();
+    ticketModal.close();
+}
+
 closeButtons.forEach(btn => {
-    btn.addEventListener('click', () => {
-        epicModal.close();
-        ticketModal.close();
-    });
+    btn.addEventListener('click', closeAndResetModals);
 });
 
 // Form Submissions
@@ -34,9 +39,7 @@ function handleEpicSubmit(e) {
     const newEpic = addEpic(formData.get('name'));
     setActiveEpicId(newEpic.id);
 
-    e.target.reset();
-    epicModal.close();
-
+    closeAndResetModals();
     displayEpics(epicObjects, activeEpicId);
     displayTickets(getActiveEpic());
 }
@@ -44,6 +47,7 @@ function handleEpicSubmit(e) {
 function handleTicketSubmit(e) {
     e.preventDefault();
     const formData = new FormData(e.target);
+    const editingId = ticketForm.getAttribute('data-editing-id');
 
     const ticketData = {
         title: formData.get('title'),
@@ -53,11 +57,14 @@ function handleTicketSubmit(e) {
     };
 
     const activeEpic = getActiveEpic();
-    addTicketToEpic(activeEpic.id, ticketData);
-
-    e.target.reset();
-    ticketModal.close();
-
+    
+    if (editingId) {
+        updateTicket(editingId, ticketData);
+    } else {
+        addTicketToEpic(activeEpic.id, ticketData);
+    }
+    
+    closeAndResetModals();
     displayTickets(activeEpic);
 }
 
@@ -75,13 +82,28 @@ epicContainer.addEventListener('click', (e) => {
     displayTickets(getActiveEpic());
 });
 
-// Delete Ticket
+// Ticket Actions
 ticketContainer.addEventListener('click', (e) => {
-    if (e.target.classList.contains('btn-delete-ticket')) {
-        const ticketId = e.target.dataset.ticketId;
-        const currentEpic = getActiveEpic();
+    const ticketId = e.target.dataset.ticketId;
+    const currentEpic = getActiveEpic();
 
+    if (e.target.classList.contains('btn-delete-ticket')) {
         deleteTicket(currentEpic.id, ticketId);
         displayTickets(currentEpic);
+    }
+
+    if (e.target.classList.contains('btn-view-ticket')) {
+        const ticket = getTicket(ticketId);
+        if (!ticket) return;
+
+        ticketForm.querySelector('#modal-ticket-title').value = ticket.title;
+        ticketForm.querySelector('#modal-due-date').value = ticket.dueDate;
+        ticketForm.querySelector('#modal-priority').value = ticket.priority;
+        ticketForm.querySelector('#modal-status').value = ticket.status;
+        ticketForm.querySelector('#modal-desc-text').value = ticket.description;
+
+        ticketForm.setAttribute('data-editing-id', ticket.id);
+
+        ticketModal.showModal();
     }
 });

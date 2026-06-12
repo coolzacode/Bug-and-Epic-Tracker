@@ -44,6 +44,7 @@ export function displayTickets(activeEpic) {
         ticketActions.className = 'ticket-actions';
 
         viewButton.className = 'btn secondary btn-view-ticket';
+        viewButton.dataset.ticketId = ticket.id;
         viewButton.type = 'button';
 
         deleteButton.className = 'btn danger btn-delete-ticket';
@@ -60,6 +61,6 @@ export function displayTickets(activeEpic) {
         ticketCard.append(ticketTitle, ticketPriorityBadge, ticketDue, ticketActions);
         fragment.appendChild(ticketCard);
     });
-    
+
     ticketContainer.appendChild(fragment);
 }
