@@ -54,7 +54,8 @@ function handleTicketSubmit(e) {
         title: formData.get('title'),
         dueDate: formData.get('dueDate'),
         priority: formData.get('priority'),
-        description: formData.get('description')
+        description: formData.get('description'),
+        status: formData.get('status')
     };
 
     const activeEpic = getActiveEpic();

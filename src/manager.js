@@ -33,7 +33,8 @@ export function addTicketToEpic(epicId, ticketData) {
         ticketData.title,
         ticketData.dueDate,
         ticketData.priority,
-        ticketData.description
+        ticketData.description,
+        ticketData.status
     );
 
     allTickets.push(newTicket);

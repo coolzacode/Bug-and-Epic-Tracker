@@ -7,12 +7,12 @@ export class Epic {
 }
 
 export class Ticket {
-    constructor (title, dueDate, priority, description = "") {
+    constructor (title, dueDate, priority, description = "", status = 'todo') {
         this.id = crypto.randomUUID();
         this.title = title;
         this.dueDate = dueDate;
         this.priority = priority;
         this.description = description;
-        this.status = 'todo';
+        this.status = status;
     }
 }
