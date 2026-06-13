@@ -9,7 +9,7 @@ const ticketModal = document.getElementById('ticket-modal');
 const epicForm = document.getElementById('epic-form');
 const ticketForm = document.getElementById('ticket-form');
 const ticketContainer = document.getElementById('ticket-grid-container');
-const closeButtons = document.querySelectorAll('#btn-close-modal');
+const closeButtons = document.querySelectorAll('.btn-close-modal');
 
 // UI
 loadFromLocalStorage();
