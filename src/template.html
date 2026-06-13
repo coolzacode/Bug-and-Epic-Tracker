@@ -1,87 +1,102 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Bug and Epic Tracker</title>
-</head>
-<body>
+  </head>
+  <body>
     <header class="nav-header">
-        <h1>B&E Tracker</h1>
+      <h1>B&E Tracker</h1>
     </header>
 
     <main class="dashboard-layout">
-        <aside class="sidebar">
-            <div class="sidebar-header">
-                <h2>Epics</h2>
-                <button type="button" id="btn-new-epic">+ New Epic</button>
-            </div>
+      <aside class="sidebar">
+        <div class="sidebar-header">
+          <h2>Epics</h2>
+          <button type="button" id="btn-new-epic">+ New Epic</button>
+        </div>
 
-            <ul class="epic-list" id="epic-list-container">
-            </ul>
-        </aside>
+        <ul class="epic-list" id="epic-list-container"></ul>
+      </aside>
 
-        <section class="epic-main">
-            <header class="epic-header">
-                <h2 id="active-epic-title">Filter Status</h2>
-                <div class="epic-controls">
-                    <button type="button" id="btn-new-ticket">+ New Ticket</button>
-                </div>
-            </header>
+      <section class="epic-main">
+        <header class="epic-header">
+          <h2 id="active-epic-title">Filter Status</h2>
+          <div class="epic-controls">
+            <button type="button" id="btn-new-ticket">+ New Ticket</button>
+          </div>
+        </header>
 
-            <ul class="ticket-grid" id="ticket-grid-container">
-            </ul>
-        </section>
+        <ul class="ticket-grid" id="ticket-grid-container"></ul>
+      </section>
     </main>
 
     <dialog id="epic-modal">
-        <form method="dialog" id="epic-form">
-            <header class="modal-header">
-                <input name="name" type="text" id="modal-ticket-title" placeholder="Epic Name..." required>
-            </header>
+      <form method="dialog" id="epic-form">
+        <header class="modal-header">
+          <input
+            name="name"
+            type="text"
+            id="modal-ticket-title"
+            placeholder="Epic Name..."
+            required
+          />
+        </header>
 
-            <footer class="modal-actions">
-                <button type="button" class="btn-close-modal">Close</button>
-                <button type="submit" id="btn-save-modal">Save Changes</button>
-            </footer>
-        </form>
+        <footer class="modal-actions">
+          <button type="button" class="btn-close-modal">Close</button>
+          <button type="submit" id="btn-save-modal">Save Changes</button>
+        </footer>
+      </form>
     </dialog>
 
     <dialog id="ticket-modal">
-        <form method="dialog" id="ticket-form">
-            <header class="modal-header">
-                <input name="title" type="text" id="modal-ticket-title" placeholder="Ticket Title" required>
-            </header>
+      <form method="dialog" id="ticket-form">
+        <header class="modal-header">
+          <input
+            name="title"
+            type="text"
+            id="modal-ticket-title"
+            placeholder="Ticket Title"
+            required
+          />
+        </header>
 
-            <div class="modal-meta-data">
-                <label for="modal-due-date">Due Date:</label>
-                <input name="dueDate" type="date" id="modal-due-date" required>
+        <div class="modal-meta-data">
+          <label for="modal-due-date">Due Date:</label>
+          <input name="dueDate" type="date" id="modal-due-date" required />
 
-                <label for="modal-priority">Priority:</label>
-                <select name="priority" id="modal-priority">
-                    <option value="low">Low</option>
-                    <option value="medium">Medium</option>
-                    <option value="critical">Critical</option>
-                </select>
+          <label for="modal-priority">Priority:</label>
+          <select name="priority" id="modal-priority">
+            <option value="low">Low</option>
+            <option value="medium">Medium</option>
+            <option value="critical">Critical</option>
+          </select>
 
-                <label for="modal-status">Status:</label>
-                <select name="status" id="modal-status">
-                    <option value="todo">To Do</option>
-                    <option value="in-progress">In Progress</option>
-                    <option value="done">Done</option>
-                </select>
-            </div>
+          <label for="modal-status">Status:</label>
+          <select name="status" id="modal-status">
+            <option value="todo">To Do</option>
+            <option value="in-progress">In Progress</option>
+            <option value="done">Done</option>
+          </select>
+        </div>
 
-            <div class="modal-description">
-                <label for="modal-desc-text">Description</label>
-                <textarea name="description" id="modal-desc-text" rows="5" placeholder="Write here..."></textarea>
-            </div>
+        <div class="modal-description">
+          <label for="modal-desc-text">Description</label>
+          <textarea
+            name="description"
+            id="modal-desc-text"
+            rows="5"
+            placeholder="Write here..."
+          ></textarea>
+        </div>
 
-            <footer class="modal-actions">
-                <button type="button" class="btn-close-modal">Close</button>
-                <button type="submit" id="btn-save-modal">Save Changes</button>
-            </footer>
-        </form>
+        <footer class="modal-actions">
+          <button type="button" class="btn-close-modal">Close</button>
+          <button type="submit" id="btn-save-modal">Save Changes</button>
+        </footer>
+      </form>
     </dialog>
-</body>
+  </body>
 </html>
