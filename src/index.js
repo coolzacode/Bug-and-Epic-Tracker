@@ -1,5 +1,5 @@
 import './styles.css';
-import { epicObjects, allTickets, activeEpicId, setActiveEpicId, getActiveEpic, getTicket, addEpic, addTicketToEpic, updateTicket, deleteTicket } from './manager.js'
+import { epicObjects, allTickets, activeEpicId, setActiveEpicId, getActiveEpic, getTicket, addEpic, addTicketToEpic, updateTicket, deleteTicket, saveToLocalStorage, loadFromLocalStorage } from './manager.js'
 import { epicContainer, displayEpics, displayTickets } from './dom.js';
 
 const createEpicBtn = document.getElementById('btn-new-epic');
@@ -11,7 +11,8 @@ const ticketForm = document.getElementById('ticket-form');
 const ticketContainer = document.getElementById('ticket-grid-container');
 const closeButtons = document.querySelectorAll('#btn-close-modal');
 
-// Default UI
+// UI
+loadFromLocalStorage();
 displayEpics(epicObjects, activeEpicId);
 displayTickets(getActiveEpic());
 

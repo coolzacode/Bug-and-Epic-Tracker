@@ -1,6 +1,3 @@
-/* base.css */
-/* for resets, fonts and global colors */
-
 :root {
     /* Layout Backgrounds */
     --bg-main: rgba(248, 250, 252, 1);
@@ -134,7 +131,7 @@ button {
     background-color: var(--priority-critical-bg);
 }
 
-/* layout.css */
+
 /* for header, sidebar and main grid layout */
 
 .nav-header {
@@ -213,9 +210,6 @@ button {
     grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
     gap: 1.5rem;
 }
-
-/* components.css */
-/* for individual ticket cards and modal popups */
 
 .ticket-card {
     background-color: var(--bg-card);
